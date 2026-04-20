@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const newStudentSchema = new Schema(
   {
@@ -57,6 +58,14 @@ const newStudentSchema = new Schema(
   },
   { timestamps: true },
 );
+
+newStudentSchema.pre("save", async function (next) {
+  try {
+    this.password = await bcrypt.hash(this.password, 10);
+  } catch (error) {
+    next(error);
+  }
+});
 
 const NewStudentModel = model("NewStudent", newStudentSchema);
 

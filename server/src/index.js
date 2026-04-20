@@ -23,6 +23,7 @@ const {
 const {
   createNewStudent,
   getNewStudent,
+  loginStudent,
 } = require("./controller/newStudent.controller");
 const { createComplaint } = require("./controller/complaint.controller");
 const { createSuggestion } = require("./controller/suggestion.controller");
@@ -40,6 +41,7 @@ app.delete("/contact/:id", deleteContact);
 
 app.post("/newstudent", createNewStudent);
 app.get("/newstudent", getNewStudent);
+app.post("/login", loginStudent);
 
 app.post("/complaint", createComplaint);
 app.post("/suggestion", createSuggestion);

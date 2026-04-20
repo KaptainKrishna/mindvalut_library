@@ -206,7 +206,7 @@ const NewStudents = () => {
                   onChange={handleChange}
                   value={newStudent.password}
                   name="password"
-                  type="text"
+                  type="password"
                   className="input"
                   placeholder="Enter password"
                 />
