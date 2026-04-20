@@ -3,12 +3,12 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const NewStudents = () => {
-   const location = useLocation();
-   const pathname = location.pathname
-     .split("/")
-     .filter(Boolean)
-     .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
-     .join(" > ");
+  const location = useLocation();
+  const pathname = location.pathname
+    .split("/")
+    .filter(Boolean)
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
+    .join(" > ");
 
   useEffect(() => {
     getNewStudent();
@@ -18,6 +18,7 @@ const NewStudents = () => {
     fullname: "",
     email: "",
     contact: "",
+    password: "",
     dob: "",
     doj: "",
     address: "",
@@ -197,6 +198,20 @@ const NewStudents = () => {
                 />
               </div>
 
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Password
+                </label>
+                <input
+                  onChange={handleChange}
+                  value={newStudent.password}
+                  name="password"
+                  type="text"
+                  className="input"
+                  placeholder="Enter password"
+                />
+              </div>
+
               {/* DOB */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -307,7 +322,7 @@ const NewStudents = () => {
               </div>
 
               {/* Address */}
-              <div className="md:col-span-2">
+              <div className="md:col-span-1">
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
                   Address
                 </label>
