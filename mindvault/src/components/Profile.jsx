@@ -1,6 +1,13 @@
 import Footer from "./Footer";
 
 const Profile = () => {
+  const handleSubmit = (e) => {
+    try {
+      e.preventDefault();
+    } catch (error) {
+      console.log("error while logined", error);
+    }
+  };
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen bg-gray-100 ">
