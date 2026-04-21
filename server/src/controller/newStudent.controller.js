@@ -29,6 +29,7 @@ const loginStudent = async (req, res) => {
 
     if (!isLogin) return res.status(401).json({ message: "Invalid User" });
     res.status(200).json({ message: "Login successfull", user });
+    
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
