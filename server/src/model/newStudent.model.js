@@ -51,6 +51,12 @@ const newStudentSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      required: true,
+      enum: ["admin", "member"],
+      default: "member",
+    },
     gender: {
       type: String,
       required: true,

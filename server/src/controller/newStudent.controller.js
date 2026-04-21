@@ -28,7 +28,7 @@ const loginStudent = async (req, res) => {
     const isLogin = await bcrypt.compare(password, user.password);
 
     if (!isLogin) return res.status(401).json({ message: "Invalid User" });
-    res.status(200).json({ message: "Login successfull" });
+    res.status(200).json({ message: "Login successfull", user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

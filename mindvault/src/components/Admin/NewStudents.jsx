@@ -320,9 +320,19 @@ const NewStudents = () => {
                   placeholder="Enter seat no"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Your Role
+                </label>
+                <select name="role" className="input">
+                  <option value="">Select Your Role</option>
+                  <option value="admin">Admin</option>
+                  <option value="member">Member</option>
+                </select>
+              </div>
 
               {/* Address */}
-              <div className="md:col-span-1">
+              <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-gray-700 mb-1">
                   Address
                 </label>
