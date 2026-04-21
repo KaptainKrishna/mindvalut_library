@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "remixicon/fonts/remixicon.css";
 import "animate.css";
@@ -42,6 +44,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
     </BrowserRouter>
   );
 };

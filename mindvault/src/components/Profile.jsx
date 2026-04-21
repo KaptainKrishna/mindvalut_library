@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useState } from "react";
 import Footer from "./Footer";
 import axios from "axios";
@@ -29,6 +30,8 @@ const Profile = () => {
         "http://localhost:8080/login",
         loginProfile,
       );
+      setLoginProfile(profileModel);
+      toast.success("Login successful");
       console.log(response.data);
     } catch (error) {
       console.log("error while logined", error);
@@ -48,7 +51,7 @@ const Profile = () => {
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Select Your Role
             </label>
-            <select onChange={handleChange} name="role" className="input">
+            <select value={loginProfile.role} onChange={handleChange} name="role" className="input">
               <option value="">Select Your Role</option>
               <option value="admin">Admin</option>
               <option value="member">Member</option>
