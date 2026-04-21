@@ -9,6 +9,7 @@ const waitingStudentSchema = new Schema(
     fullname: {
       type: String,
       required: true,
+      unique: true,
     },
     contact: {
       type: String,

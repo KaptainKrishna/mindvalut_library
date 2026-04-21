@@ -2,6 +2,7 @@ import { useState } from "react";
 import Footer from "./Footer";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const waitingModel = {
@@ -12,7 +13,6 @@ const Home = () => {
   };
   const [open, setOpen] = useState(false);
   const [waitingList, setWaitingList] = useState(waitingModel);
-  const [waitingData, setWaitingData] = useState([]);
   const handleChange = (e) => {
     const input = e.target;
     const name = input.name;
@@ -26,16 +26,27 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (
+        !waitingList.fullname ||
+        !waitingList.contact ||
+        !waitingList.branch
+      ) {
+        toast.error("Please fill all fields");
+        return;
+      }
       const response = await axios.post(
         "http://localhost:8080/waitingstudent",
         waitingList,
       );
       console.log(response.data);
-      setWaitingData([...waitingData, waitingList]);
       setWaitingList(waitingModel);
-      setOpen(false);
+      toast.success("Added to waiting list");
+      setTimeout(() => {
+        setOpen(false);
+      }, 500);
     } catch (error) {
       console.error("Error submitting form", error);
+      toast.error("Failed to add to waiting list");
     }
   };
 
@@ -148,12 +159,12 @@ const Home = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
           {menu.map((item, index) => (
             <div
-              key={index}
+              key={item._id || index}
               className="flex flex-col items-center gap-3 p-5 text-center bg-white rounded-xl shadow-lg transform transition hover:scale-105"
             >
               <img
                 src={item.img}
-                alt="locker"
+                alt={item.label}
                 className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
               />
 
