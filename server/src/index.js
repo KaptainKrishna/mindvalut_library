@@ -14,6 +14,7 @@ const cors = require("cors");
 const {
   createWaitingStudent,
   getWaitingStudent,
+  deleteWaitingStudent,
 } = require("./controller/waitingList.controller");
 const {
   createContact,
@@ -34,6 +35,7 @@ app.use(express.json());
 
 app.post("/waitingstudent", createWaitingStudent);
 app.get("/waitingstudent", getWaitingStudent);
+app.delete("/waitingstudent/:id",deleteWaitingStudent)
 
 app.post("/contact", createContact);
 app.get("/contact", fetchContact);

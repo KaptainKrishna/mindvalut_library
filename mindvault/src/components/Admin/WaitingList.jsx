@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const WaitingList = () => {
   const [waitingList, setWaitingList] = useState([]);
@@ -13,6 +14,20 @@ const WaitingList = () => {
       setWaitingList(response.data);
     } catch (error) {
       console.log(error, "fetching error");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/waitingstudent/${id}`);
+
+      const updatedData = waitingList.filter((item) => item._id !== id);
+      setWaitingList(updatedData);
+
+      toast.success("Deleted successfully");
+    } catch (error) {
+      console.log(error, "error while deleting student");
+      toast.error("Delete failed");
     }
   };
   return (
@@ -45,7 +60,10 @@ const WaitingList = () => {
                       <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded transition hover:cursor-pointer">
                         Add Student
                       </button>
-                      <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition hover:cursor-pointer">
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition hover:cursor-pointer"
+                      >
                         Remove Student
                       </button>
                     </div>
@@ -59,7 +77,7 @@ const WaitingList = () => {
         {/* Mobile Cards */}
         <div className="md:hidden flex flex-col gap-4">
           {waitingList.map((item, index) => (
-            <div className="p-4 rounded-lg shadow bg-white">
+            <div key={index} className="p-4 rounded-lg shadow bg-white">
               <p>
                 <b>S/NO:</b> {index + 1}
               </p>
@@ -75,7 +93,7 @@ const WaitingList = () => {
               <p>
                 <b>Branch:</b> {item.branch}
               </p>
-              <p>
+              <div>
                 <b>Action:</b>
                 <div className="flex flex-col sm:flex-row gap-2 py-2">
                   <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded transition hover:cursor-pointer">
@@ -85,7 +103,7 @@ const WaitingList = () => {
                     Remove Student
                   </button>
                 </div>
-              </p>
+              </div>
             </div>
           ))}
         </div>
